@@ -8,6 +8,10 @@ license = "MIT"
 readme = "README.md"
 repository = "https://github.com/shareit-app/cli"
 
+[[bin]]
+name = "shareit"
+path = "src/main.rs"
+
 [dependencies]
 atty = "0.2"
 clap = "3.0.0-beta.4"

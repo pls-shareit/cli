@@ -35,12 +35,12 @@ shortner, file uploader and pastebin.
 ### Windows
 
  1. Download the executable with Power shell
-    (or [click here](https://github.com/pls-shareit/server/releases/latest/download/shareitd.exe)):
+    (or [click here](https://github.com/pls-shareit/cli/releases/latest/download/shareit.exe)):
 
-    `iwr -outf clique-collector.exe https://github.com/pls-shareit/server/releases/latest/download/shareitd.exe`
+    `iwr -outf clique-collector.exe https://github.com/pls-shareit/cli/releases/latest/download/shareit.exe`
  2. Add the executable to your PATH, for example:
 
-    `Move-Item -Path .\shareitd.exe -Destination C:\Windows\system32`
+    `Move-Item -Path .\shareit.exe -Destination C:\Windows\system32`
  3. You may need to restart your shell or computer.
 
 ### From source
@@ -49,8 +49,8 @@ If you don't want to use a pre-compiled executable, you can compile one using
 Rust:
 
  1. [Install Rust](https://www.rust-lang.org/tools/install).
- 2. Run `cargo build --release` in the same directory as this README.
- 3. Your binary will be at `target/release/shareit`.
+ 2. Run `cargo install --git https://github.com/pls-shareit/cli` in the same directory as this README.
+ 3. The binary should have been automatically added to your PATH as `shareit`.
 
 ## Usage
 
