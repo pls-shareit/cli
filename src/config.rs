@@ -67,7 +67,11 @@ impl Config {
                 if !data.contains_key(&key) {
                     return Err(format!("No such config option: {}", key));
                 }
-                data.insert(key, value.into());
+                let value = match value.is_empty() {
+                    true => serde_json::Value::Null,
+                    false => value.into()
+                };
+                data.insert(key, value);
                 let file = File::create(&self.path)
                     .map_err(|e| format!("Could not create config file: {}", e))?;
                 serde_json::to_writer(&file, &data)
