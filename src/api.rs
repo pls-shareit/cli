@@ -38,7 +38,7 @@ fn get_headers(action: &CreateAction, options: &ActionOptions, config: &ConfigDa
         add_header!(headers; "Expire-After" => expire_after.as_secs().to_string());
     };
     if let Some(password) = &config.password {
-        add_header!(headers; "Authorization" => password);
+        add_header!(headers; "Authorization" => format!("Password {}", password));
     };
     headers
 }
@@ -67,7 +67,8 @@ fn add_body(request: RequestBuilder, source: DataSource) -> Result<RequestBuilde
 
 fn api_error_message(message: String, status: StatusCode) -> String {
     let hint = match status {
-        StatusCode::UNAUTHORIZED => Some("You can set your password with 'shareit --config password <password>'."),
+        StatusCode::UNAUTHORIZED => Some("Your password may be incorrect - set it with 'shareit --config password <password>'."),
+        StatusCode::FORBIDDEN => Some("You can set your password with 'shareit --config password <password>'."),
         StatusCode::CONFLICT => Some("If you omit the '--name' flag, the server will generate a random one."),
         StatusCode::INTERNAL_SERVER_ERROR => Some("This is probably not your fault, or an issue with the CLI. Try contacting the server administrators."),
         _ => None
